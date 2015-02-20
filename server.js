@@ -18,18 +18,11 @@ app.get("/news", function(req, res){
     }
   });
 });
-  // request(url2, function (error, response, body) {
-  //   if (!error && response.statusCode == 200) {
-  //     res.write(body);
-  //   }
-  // });
-  // res.end();
-
 
 var url2 = secret2.api;
 app.get("/weather", function(req, res){
   request(url2, function (error, response, body) {
-    console.log(body);
+    // console.log(body);
     if (!error && response.statusCode == 200) {
       res.send(body);
     }

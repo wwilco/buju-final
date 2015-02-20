@@ -1,17 +1,16 @@
 <html>
-<title>bujutwo2too</title>
+<title>buju</title>
 <head>
   <link rel="stylesheet" href="css/bujustyle.css">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/nytimes.css">
   <link rel="stylesheet" href="css/soloweather.css">
   <link rel="stylesheet" href="weather_icons/weather-icons.css">
-
-
 </head>
   <body>
+    <!-- spotify player -->
     <iframe id="spotify" src="https://embed.spotify.com/?uri=spotify:user:1250679339:playlist:0pbHnaOr3cRY1napC9hrt7" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-
+    <!-- sports bar -->
     <div class="sports">
       <a href="http://rangers.nhl.com/club/schedule.htm?season=20142015&gameType=2" target="_blank">
         <img src="pics/nyrangers.png" id="nyr" class ="sportpic" height="50"/>
@@ -29,7 +28,7 @@
         <img src="pics/yahoo.png" id="yahoo" class ="sportpic" height="50" style="border-radius: 10px"/>
       </a>
     </div>
-    <!-- <h3>testing   <span class="wi wi-cloudy"></span> </h3> -->
+    <!-- social bar -->
     <div class="others">
       <a href="https://secure.skype.com/portal/overview" target="_blank">
         <img src="pics/skype.png" id="skype" class ="otherpic" height="50"/>
@@ -44,14 +43,11 @@
         <img src="pics/venmo.png" id="venmo" class ="otherpic" height="50"/>
       </a>
     </div>
+
     <div id="lock">
       <img src="pics/lock.png" id="lockpic" height="50"/>
     </div>
-    <!-- <a href="https://twitter.com/?lang=en" target="_blank">
-      <div id="tweet">
-        <img src="pics/twitter.png" id="twitterpic" height="400"/>
-      </div>
-    </a> -->
+
     <a href="https://www.facebook.com/" target="_blank">
       <div id="facebook">
         <img src="pics/fbhead.png" id="fbpic" height="45"/>
@@ -76,13 +72,15 @@
         <h4 style="color: black; background-color: rgba(255,255,255,.3); padding: 3px; border-radius: 5px; border: solid 1px">wwilcox88<span style="color: red; font-size: 16px">(12)</span></h4>
       </div>
     </a>
-
+    <!-- twitter widget -->
     <div id="twitterActive">
       <a class="twitter-timeline" href="https://twitter.com/wilwilco/lists/all" data-widget-id="568522431980388352"></a>
     </div>
+    <!-- twitter widget script -->
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 
     <script charset="utf-8">
+    //ny times box
       var body = document.querySelector("body");
       var div1 = document.createElement("div");
       div1.setAttribute("id", "div1");
@@ -127,8 +125,17 @@
           abstract.setAttribute("id", "abstract");
           abstract.innerHTML = parsed["results"][i]["abstract"];
           div1.appendChild(abstract);
+          // //line break
+          var lineBreak = document.createElement("br");
+          div1.appendChild(lineBreak);
 
-          // //image
+        };
+
+      });
+      xhr.send();
+
+          // //image appender
+          // //need to fix for loop when articles do not have img url
           // var imgNYTimes = document.createElement("img");
           // imgNYTimes.setAttribute("id", "imgNYTimes");
           // if(parsed["results"][i]["multimedia"][0]["url"]){
@@ -145,17 +152,8 @@
           // };
           //
           // link.appendChild(imgNYTimes);
-          // //line break
-          var lineBreak = document.createElement("br");
-          div1.appendChild(lineBreak);
-        };
-
-      });
-      xhr.send();
-
 
       //weather
-
       var body = document.querySelector("body");
       var site = document.createElement("a");
       site.setAttribute("href", "http://forecast.io/#/f/40.7142,-74.0064");
@@ -167,21 +165,18 @@
       weatherDiv.setAttribute("id", "weatherDiv");
       site.appendChild(weatherDiv);
 
-
       var url2 = "/weather";
       var xhrx = new XMLHttpRequest();
       xhrx.open("GET", url2);
       xhrx.addEventListener('load', function(e) {
         var data = xhrx.responseText;
         var parsed = JSON.parse(data);
-
         //temperature
         var temp = document.createElement("h2");
         temp.setAttribute("id", "temp");
         console.log(parsed["currently"]["temperature"]);
         temp.innerHTML = parseInt(parsed["currently"]["temperature"]) + ("°");
         weatherDiv.appendChild(temp);
-
         //icon
         var weatherImg = document.createElement("h6");
         weatherImg.setAttribute("id", "weatherImg")
@@ -196,25 +191,24 @@
         }
         else if (parsed["currently"]["icon"] === "partly-cloudy-night"){
           var weatherStatus = "wi wi-cloudy";
-          console.log("cloudy at night");
         }
         else if (parsed["currently"]["icon"] === "snow"){
           var weatherStatus = "wi wi-snow";
-          console.log("snowing right meow");
+        }
+        else if (parsed["currently"]["icon"] === "clear-night"){
+          var weatherStatus = "wi wi-night-clear";
         }
 
         weatherImg.setAttribute("class", weatherStatus);
-
-        console.log(weatherImg);
         weatherDiv.appendChild(weatherImg);
-
+        console.log(weatherImg);
 
       });
       xhrx.send();
 
-
     </script>
-    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    <!-- extra twitter widget? -->
+    <!-- // <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script> -->
 
   </body>
 </html>
